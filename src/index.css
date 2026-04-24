@@ -8,50 +8,66 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Deep space dark theme — Neura Pulse */
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 222 40% 10%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 222 40% 10%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 175 84% 55%;
+    --primary-foreground: 222 47% 6%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 222 32% 14%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 222 30% 14%;
+    --muted-foreground: 215 20% 70%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 268 83% 65%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 217 32% 20%;
+    --input: 217 32% 18%;
+    --ring: 175 84% 55%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    /* Brand accent palette */
+    --brand-cyan: 175 84% 55%;
+    --brand-violet: 268 83% 65%;
+    --brand-orange: 22 92% 60%;
+    --brand-blue: 210 95% 60%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(175 84% 55% / 0.9), hsl(268 83% 65% / 0.9), hsl(22 92% 60% / 0.85));
+    --gradient-soft: linear-gradient(135deg, hsl(222 47% 6%) 0%, hsl(222 50% 10%) 50%, hsl(225 55% 8%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(222 40% 12% / 0.7) 0%, hsl(222 40% 8% / 0.5) 100%);
+    --gradient-text: linear-gradient(135deg, hsl(175 84% 65%), hsl(268 83% 70%), hsl(22 92% 65%));
+    --gradient-glow: radial-gradient(60% 50% at 50% 50%, hsl(175 84% 55% / 0.35), transparent 70%);
+
+    /* Shadows */
+    --shadow-glow: 0 0 60px hsl(175 84% 55% / 0.35);
+    --shadow-glow-violet: 0 0 80px hsl(268 83% 65% / 0.35);
+    --shadow-elegant: 0 30px 80px -20px hsl(222 80% 4% / 0.7);
+    --shadow-card: 0 8px 32px hsl(222 80% 2% / 0.5);
+
+    /* Transitions */
+    --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -100,6 +116,71 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv11";
+    background-image:
+      radial-gradient(60% 40% at 15% 10%, hsl(175 84% 30% / 0.18), transparent 60%),
+      radial-gradient(50% 40% at 85% 20%, hsl(268 83% 40% / 0.18), transparent 60%),
+      radial-gradient(50% 40% at 50% 100%, hsl(22 92% 35% / 0.12), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-card/40 backdrop-blur-xl border border-border/60;
+    box-shadow: var(--shadow-card), inset 0 1px 0 0 hsl(0 0% 100% / 0.04);
+  }
+
+  .glass-strong {
+    @apply bg-card/70 backdrop-blur-2xl border border-border/80;
+    box-shadow: var(--shadow-elegant), inset 0 1px 0 0 hsl(0 0% 100% / 0.06);
+  }
+
+  .text-gradient {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .btn-primary-gradient {
+    background: var(--gradient-hero);
+    color: hsl(var(--background));
+    transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth), filter 0.4s;
+    box-shadow: 0 10px 30px -10px hsl(175 84% 55% / 0.5);
+  }
+  .btn-primary-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px -12px hsl(175 84% 55% / 0.65);
+    filter: brightness(1.05);
+  }
+
+  .btn-outline-glow {
+    @apply border border-border/80 bg-card/30 backdrop-blur-md text-foreground;
+    transition: all 0.4s var(--transition-smooth);
+  }
+  .btn-outline-glow:hover {
+    @apply border-primary/60;
+    box-shadow: 0 0 24px hsl(var(--primary) / 0.25);
+    transform: translateY(-2px);
+  }
+}
+
+@layer utilities {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-6 lg:px-10;
+  }
+
+  .grid-noise {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.4) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.4) 1px, transparent 1px);
+    background-size: 60px 60px;
   }
 }
