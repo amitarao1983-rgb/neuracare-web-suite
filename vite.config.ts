@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [react()],
-  base: "/Neura-Pulse-AI-Health-Solutions-LLP/",
+  
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
